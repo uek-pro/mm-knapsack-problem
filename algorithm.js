@@ -40,7 +40,7 @@ class KnapsackProblem {
 
                     if (this.results[i - this.elements[j].weight] + this.elements[j].value > this.results[i]) {
 
-                        this.results[i] = this.results[i - this.elements[j].weight] + this.elements[j].value     
+                        this.results[i] = this.results[i - this.elements[j].weight] + this.elements[j].value;
                     }
                 }
             }
@@ -51,20 +51,16 @@ class KnapsackProblem {
     };
 };
 
-/* user input */
-
-const capacity = 23;
-const elements = [
-    new KnapsackElement(1, 2),
-    new KnapsackElement(3, 10),
-    new KnapsackElement(2, 7),
-    new KnapsackElement(3, 5)
-];
-
-
-/* function call */
-
-const kp = new KnapsackProblem(elements, capacity);
-kp.calculateOptimal(); 
-
-console.log('Optymalna wartość plecaka:', kp.optimalValue);
+// /* USAGE */
+// /* user input */
+// const capacity = 23;
+// const elements = [
+//     new KnapsackElement(1, 2),
+//     new KnapsackElement(3, 10),
+//     new KnapsackElement(2, 7),
+//     new KnapsackElement(3, 5)
+// ];
+// /* function call */
+// const kp = new KnapsackProblem(elements, capacity);
+// kp.calculateOptimal(); 
+// console.log('Optymalna wartość plecaka:', kp.optimalValue);

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Problem plecakowy</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Problem plecakowy - implementacja algorytmu</h1>
+    
+        <div class="capacity">
+            <span>Pojemność plecaka</span>
+            <input type="number" v-model.number="capacity">
+        </div>
+
+        <button v-on:click="addElement()" class="btn btn--green">Dodaj nowy element</button>
+
+        <div class="element" v-for="(element, index) in elements">
+            <div class="box">
+                <span>Waga elementu</span>
+                <input type="number" v-model.number="element.weight">
+            </div>
+            <div class="box">
+                <span>Wartość elementu</span>
+                <input type="number" v-model.number="element.value">
+            </div>
+            <button v-on:click="removeElement(index)" class="btn btn--red btn--square">X</button>
+        </div>
+
+        <button v-on:click="calculateOptimal()" v-if="elements.length > 0" class="btn btn--blue">Oblicz optymalną wartość</button>
+
+        <div v-if="message" v-text="message" class="message"></div>
+        <div v-if="optimalValue" class="result-info">Optymalna wartość</div>
+        <div v-if="optimalValue" v-text="optimalValue" class="result-value"></div>
+    </div>
+
+    <script src="algorithm.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                capacity: 0,
+                elements: [],
+                optimalValue: null,
+                message: null
+            },
+            methods: {
+                addElement: function () {
+                    this.elements.push(new KnapsackElement(0, 0));
+                },
+                removeElement: function (index) {
+                    this.elements.splice(index, 1);
+                },
+                calculateOptimal: function () {
+                    if (this.capacity > 0) {
+                        this.message = null;
+                        const kp = new KnapsackProblem(this.elements, this.capacity);
+                        kp.calculateOptimal();
+                        this.optimalValue = kp.optimalValue;
+                    } else {
+                        this.message = 'Ustaw poprawną pojemność plecaka';
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

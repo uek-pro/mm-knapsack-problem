@@ -1,0 +1,87 @@
+html {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #eee;
+}
+h1 {
+    font-size: 1.6em;
+}
+input {
+    padding: 8px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #CACACA;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1em;
+}
+span {
+    display: block;
+    margin-bottom: 6px;
+}
+#app {
+    width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+.btn {
+    color: #000;
+    border: 2px #000 solid;
+    background: #fff;
+    font-weight: 600;
+    font-size: 0.78em;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    display: inline-block;
+    outline: none;
+    margin: 20px 0;
+}
+.btn:hover {
+    text-decoration:none;
+    background: #000;
+    color: #fff;
+}
+.btn--red {
+    border-color:#dc143c;
+}
+.btn--red:hover {
+    background: #dc143c;
+}
+.btn--green {
+    border-color:#507d2a;
+}
+.btn--green:hover {
+    background: #507d2a;
+}
+.btn--blue {
+    border-color: #6a84ca;
+}
+.btn--blue:hover {
+    background: #6a84ca;
+}
+.btn--square {
+    margin: 0;
+}
+.element {
+    margin: 10px 0;
+}
+.message {
+    color: #dc143c;
+}
+.result-info {
+    font-size: 1.6em;
+    font-weight: 300;
+    margin: 20px 0;
+}
+.result-value {
+    font-size: 4em;
+    font-weight: 700;
+    margin: 20px 0;
+}
+.box {
+    display: inline-block;
+}
