@@ -14,9 +14,14 @@ input {
     padding: 8px;
     border-width: 2px;
     border-style: solid;
-    border-color: #CACACA;
+    border-color: #cacaca;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 1em;
+    outline: none;
+}
+input:focus {
+    border-color: goldenrod;
+    background-color: yellow;
 }
 span {
     display: block;
@@ -26,6 +31,7 @@ span {
     width: 800px;
     margin: 0 auto;
     text-align: center;
+    box-sizing: border-box;
 }
 .btn {
     color: #000;
@@ -45,14 +51,17 @@ span {
     background: #000;
     color: #fff;
 }
+.btn:focus {
+    background-color: yellow;
+}
 .btn--red {
-    border-color:#dc143c;
+    border-color: #dc143c;
 }
 .btn--red:hover {
     background: #dc143c;
 }
 .btn--green {
-    border-color:#507d2a;
+    border-color: #507d2a;
 }
 .btn--green:hover {
     background: #507d2a;
@@ -69,6 +78,17 @@ span {
 .element {
     margin: 10px 0;
 }
+.index {
+    font-weight: 700;
+    display: inline-block;
+    font-size: 1.15em;
+    margin: 0;
+    vertical-align: middle;
+    width: 54px;
+}
+.index::after {
+    content: '.';
+}
 .message {
     color: #dc143c;
 }
@@ -84,4 +104,36 @@ span {
 }
 .box {
     display: inline-block;
+}
+@media screen and (max-width: 800px) {
+    input {
+        width: 160px;
+    }
+    #app {
+        width: 100%;
+        margin: 0;
+        padding: 0 5%;
+    }
+    .btn {
+        padding: 20px 32px;
+    }
+    .btn--square {
+        padding: 12px 20px;
+    }
+}
+@media screen and (max-width: 600px) {
+    span {
+        font-size: 0.8em;
+    }
+    input {
+        width: 120px;
+    }
+}
+@media screen and (max-width: 460px) {
+    .index {
+        display: none;
+    }
+    .btn--square {
+        display: none;
+    }
 }

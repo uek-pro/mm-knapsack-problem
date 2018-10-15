@@ -17,9 +17,10 @@
             <input type="number" v-model.number="capacity">
         </div>
 
-        <button v-on:click="addElement()" class="btn btn--green">Dodaj nowy element</button>
+        <button v-on:click="addElement()" class="btn btn--green">Dodaj element</button>
 
         <div class="element" v-for="(element, index) in elements">
+            <span v-text="index+1" class="index"></span>
             <div class="box">
                 <span>Waga elementu</span>
                 <input type="number" v-model.number="element.weight">
@@ -28,7 +29,7 @@
                 <span>Wartość elementu</span>
                 <input type="number" v-model.number="element.value">
             </div>
-            <button v-on:click="removeElement(index)" class="btn btn--red btn--square">X</button>
+            <button v-on:click="removeElement(index)" class="btn btn--red btn--square" tabindex="-1">X</button>
         </div>
 
         <button v-on:click="calculateOptimal()" v-if="elements.length > 0" class="btn btn--blue">Oblicz optymalną wartość</button>
@@ -59,8 +60,7 @@
                     if (this.capacity > 0) {
                         this.message = null;
                         const kp = new KnapsackProblem(this.elements, this.capacity);
-                        kp.calculateOptimal();
-                        this.optimalValue = kp.optimalValue;
+                        this.optimalValue = kp.calculateOptimal();
                     } else {
                         this.message = 'Ustaw poprawną pojemność plecaka';
                     }
