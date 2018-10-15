@@ -16,6 +16,13 @@ class KnapsackElement {
         this.value = value;
     };
 }
+// Funkcja porównująca dwa obiekty KnapsackElement
+function compare (a, b)
+	{
+		if(a.value/a.weight < b.value/b.weight)return 1;
+		if(a.value/a.value > b.value/b.weight)return -1;
+		if(a.value/a.value == b.value/b.weight)return 0;
+	}
 
 /**
  * Klasa reprezentująca obiekt problemu plecakowego.
@@ -26,6 +33,7 @@ class KnapsackProblem {
         this.elementsCount = this.elements.length;
         this.capacity = capacity + 1;
         this.optimalValue = -1;
+		this.order = [];
         this.results = null;
     };
     calculateOptimal() {
@@ -49,6 +57,32 @@ class KnapsackProblem {
         console.log('Wartości:', this.results);
         return this.optimalValue = this.results[this.results.length - 1];
     };
+	
+	
+	calculateOrder() 
+	{
+		var elements = this.elements;
+		var capacity = this.capacity;
+		var elementsCount = elements.length;
+		elements.sort(compare);
+		var cap = capacity;
+		var i = 0;
+		var result = [];
+		do{
+			if(elements[i].weight>=cap)
+			{
+				result.push(new KnapsackElement(cap, elements[i].value));
+				cap=0;
+			}
+			else
+			{
+				result.push(elements[i]);
+				cap=cap-elements[i].weight;
+			}
+			i++;
+		}while(cap>0 && i<elementsCount);
+		return this.order = result;
+	}
 };
 
 // /* USAGE */

@@ -7,6 +7,8 @@
     <title>Problem plecakowy</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+	<script src="https://unpkg.com/chart.js@2.7.2/dist/Chart.bundle.js"></script>
+	<script src="https://unpkg.com/vue-chartkick@0.5.0"></script>
 </head>
 <body>
     <div id="app">
@@ -32,10 +34,22 @@
         </div>
 
         <button v-on:click="calculateOptimal()" v-if="elements.length > 0" class="btn btn--blue">Oblicz optymalną wartość</button>
+		<button v-on:click="calculateOrder()" v-if="elements.length > 0" class="btn btn--blue">Oblicz najbardziej optymalne ułożenie rzeczy</button>
 
         <div v-if="message" v-text="message" class="message"></div>
         <div v-if="optimalValue" class="result-info">Optymalna wartość</div>
         <div v-if="optimalValue" v-text="optimalValue" class="result-value"></div>
+		
+		<h3>Optymalny wybór elementów</h3>
+		
+		<div class="orde" v-for="(q, v) in orde">
+			<div class="static">
+                <p> Waga elementu: {{ q.weight }} Wartość elementu: {{ q.value }} </p>
+            </div>
+		</div>
+		
+		<pie-chart class="data" :data="dataset"></pie-chart>
+		
     </div>
 
     <script src="algorithm.js"></script>
@@ -46,7 +60,9 @@
                 capacity: 0,
                 elements: [],
                 optimalValue: null,
-                message: null
+                message: null,
+				orde: [],
+				dataset: []
             },
             methods: {
                 addElement: function () {
@@ -64,7 +80,25 @@
                     } else {
                         this.message = 'Ustaw poprawną pojemność plecaka';
                     }
-                }
+                },
+				
+				calculateOrder: function () {
+					if (this.capacity > 0) {
+                        this.message = null;
+                        const kp = new KnapsackProblem(this.elements, this.capacity);
+                        kp.calculateOrder();
+						this.orde = kp.order;
+						var it = 0;
+						this.dataset = [];
+						for(it=0;it<this.orde.length;it++)
+						{
+							this.dataset.push([this.orde[it].value, this.orde[it].weight]);
+						}
+						console.log(this.dataset);
+                    } else {
+                        this.message = 'Ustaw poprawną pojemność plecaka';
+                    }
+				}
             }
         });
     </script>
