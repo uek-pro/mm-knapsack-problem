@@ -14,14 +14,16 @@ Wykorzystanie programowania dynamicznego do rozwiązania zagadnienia optymalizac
 
 1. Uruchomnienie index.html.
 2. Wypełnienie pól formularza.
-3. Wciśnięcie przycisku `Oblicz optymalną wartość`.
+3. Wciśnięcie przycisku `Oblicz optymalną wartość`
+   i/lub "Oblicz najbardziej optymalne ułożenie rzeczy".
 
 albo
 
 1. Uruchomienie skryptu algorythm.js.
 2. Dodanie do skryptu danych wejściowych.
 3. Utworzenie obiektu problemu plecakowego.
-4. Wywołanie metody `calculateOptimal()`, która zwróci wartość optymalną plecaka.
+4. Wywołanie metody `calculateOptimal()`, która zwróci wartość optymalną plecaka
+   lub 'calculateOrder()' która zwróci optymalne ułożenie rzeczy w plecaku.
 
 Przykład
 
@@ -37,8 +39,15 @@ const elements = [
 /* function call */
 const kp = new KnapsackProblem(elements, capacity);
 kp.calculateOptimal();
+kp.calculateOrder();
 console.log('Optymalna wartość plecaka:', kp.optimalValue);
+console.log('Optymalne ułożenie rzeczy', kp.order);
 // return: Optymalna wartość plecaka: 80
+//
+// 0: (2) ["7", 2]
+// 1: (2) ["10", 3]
+// 2: (2) ["2", 1]
+// 3: (2) ["Pusta przestrzeń", 17]
 ```
 
 Aplikacja dostępna jest także pod adresem
