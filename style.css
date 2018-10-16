@@ -33,6 +33,10 @@ span {
     text-align: center;
     box-sizing: border-box;
 }
+.title {
+    margin-top: 30px;
+    font-style: italic;
+}
 .btn {
     color: #000;
     border: 2px #000 solid;
