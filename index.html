@@ -40,26 +40,26 @@
 
             <button v-on:click="calculateOptimal()" v-if="elements.length > 0" class="btn btn--blue">Oblicz optymalną wartość</button>
 
+            <div v-if="message" v-text="message" class="message"></div>
+            <div v-if="optimalValue" class="result-info">Optymalna wartość</div>
+            <div v-if="optimalValue" v-text="optimalValue" class="result-value"></div>
+
             <span class="title">Ciągły problem plecakowy z ograniczoną liczbą elementów</span>
 
             <button v-on:click="calculateOrder()" v-if="elements.length > 0" class="btn btn--blue">Oblicz najbardziej optymalne ułożenie rzeczy</button>
 
+            <p v-if="dataset.length > 0" style="font-weight: bold">Optymalny wybór elementów</p>
+		
+            <div class="orde" v-for="(q, v) in orde">
+                <div class="static">
+                    <p>{{ v + 1 }}. Element - Waga elementu: {{ q.weight }}</p>
+                </div>
+            </div>
+            
+            <pie-chart class="data" :data="dataset"></pie-chart>
+        
         </div>
 
-        <div v-if="message" v-text="message" class="message"></div>
-        <div v-if="optimalValue" class="result-info">Optymalna wartość</div>
-        <div v-if="optimalValue" v-text="optimalValue" class="result-value"></div>
-		
-		<p v-if="dataset.length > 0" style="font-weight: bold">Optymalny wybór elementów</p>
-		
-		<div class="orde" v-for="(q, v) in orde">
-			<div class="static">
-                <p> Waga elementu: {{ q.weight }} Wartość elementu: {{ q.value }} </p>
-            </div>
-		</div>
-		
-		<pie-chart class="data" :data="dataset"></pie-chart>
-		
     </div>
 
     <script src="algorithm.js"></script>
