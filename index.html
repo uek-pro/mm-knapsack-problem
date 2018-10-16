@@ -19,9 +19,10 @@
             <input type="number" v-model.number="capacity">
         </div>
 
-        <button v-on:click="addElement()" class="btn btn--green">Dodaj nowy element</button>
+        <button v-on:click="addElement()" class="btn btn--green">Dodaj element</button>
 
         <div class="element" v-for="(element, index) in elements">
+            <span v-text="index+1" class="index"></span>
             <div class="box">
                 <span>Waga elementu</span>
                 <input type="number" v-model.number="element.weight">
@@ -30,17 +31,26 @@
                 <span>Wartość elementu</span>
                 <input type="number" v-model.number="element.value">
             </div>
-            <button v-on:click="removeElement(index)" class="btn btn--red btn--square">X</button>
+            <button v-on:click="removeElement(index)" class="btn btn--red btn--square" tabindex="-1">X</button>
         </div>
 
-        <button v-on:click="calculateOptimal()" v-if="elements.length > 0" class="btn btn--blue">Oblicz optymalną wartość</button>
-		<button v-on:click="calculateOrder()" v-if="elements.length > 0" class="btn btn--blue">Oblicz najbardziej optymalne ułożenie rzeczy</button>
+        <div v-if="elements.length > 0">
+
+            <span class="title">Dyskretny problem plecakowy z nieograniczoną liczbą elementów danego typu</span>
+
+            <button v-on:click="calculateOptimal()" v-if="elements.length > 0" class="btn btn--blue">Oblicz optymalną wartość</button>
+
+            <span class="title">Ciągły problem plecakowy z ograniczoną liczbą elementów</span>
+
+            <button v-on:click="calculateOrder()" v-if="elements.length > 0" class="btn btn--blue">Oblicz najbardziej optymalne ułożenie rzeczy</button>
+
+        </div>
 
         <div v-if="message" v-text="message" class="message"></div>
         <div v-if="optimalValue" class="result-info">Optymalna wartość</div>
         <div v-if="optimalValue" v-text="optimalValue" class="result-value"></div>
 		
-		<h3>Optymalny wybór elementów</h3>
+		<p v-if="dataset.length > 0" style="font-weight: bold">Optymalny wybór elementów</p>
 		
 		<div class="orde" v-for="(q, v) in orde">
 			<div class="static">
@@ -75,8 +85,7 @@
                     if (this.capacity > 0) {
                         this.message = null;
                         const kp = new KnapsackProblem(this.elements, this.capacity);
-                        kp.calculateOptimal();
-                        this.optimalValue = kp.optimalValue;
+                        this.optimalValue = kp.calculateOptimal();
                     } else {
                         this.message = 'Ustaw poprawną pojemność plecaka';
                     }
