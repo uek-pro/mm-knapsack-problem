@@ -1,4 +1,4 @@
-/* main.js file */
+﻿/* main.js file */
 
 /* class definitions */
 
@@ -62,7 +62,7 @@ class KnapsackProblem {
 	calculateOrder() 
 	{
 		var elements = this.elements;
-		var capacity = this.capacity;
+		var capacity = this.capacity - 1;
 		var elementsCount = elements.length;
 		elements.sort(compare);
 		var cap = capacity;
@@ -81,6 +81,7 @@ class KnapsackProblem {
 			}
 			i++;
 		}while(cap>0 && i<elementsCount);
+		result.push(new KnapsackElement(cap, "Pusta przestrzeń"));
 		return this.order = result;
 	}
 };
